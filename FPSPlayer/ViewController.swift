@@ -140,6 +140,7 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                        if let urlScheme = url?.scheme, (urlScheme !=  URL_SCHEME_NAME) {
                            return false
                        }
+             loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
                        let assetStr: String = url?.host ?? ""
                        let assetId = Data(bytes: assetStr.cString(using: String.Encoding.utf8)!, count: assetStr.lengthOfBytes(using: String.Encoding.utf8))
                        self.getAppCertificateData {[weak self] (certificate) in
