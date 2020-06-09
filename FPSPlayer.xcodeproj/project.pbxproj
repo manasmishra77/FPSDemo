@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		63937B3A2418E60E000854C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B392418E60E000854C9 /* AppDelegate.swift */; };
+		63937B3C2418E60E000854C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B3B2418E60E000854C9 /* SceneDelegate.swift */; };
+		63937B3E2418E60E000854C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B3D2418E60E000854C9 /* ViewController.swift */; };
+		63937B412418E60E000854C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63937B3F2418E60E000854C9 /* Main.storyboard */; };
+		63937B432418E611000854C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63937B422418E611000854C9 /* Assets.xcassets */; };
+		63937B462418E611000854C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63937B442418E611000854C9 /* LaunchScreen.storyboard */; };
+		63937B512418E611000854C9 /* FPSPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B502418E611000854C9 /* FPSPlayerTests.swift */; };
+		63937B5C2418E64B000854C9 /* JioMediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B5B2418E64B000854C9 /* JioMediaPlayerView.swift */; };
+		63937B5E2418E6B3000854C9 /* AVPlayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B5D2418E6B3000854C9 /* AVPlayer+Extensions.swift */; };
+		63937B602418EB14000854C9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B5F2418EB14000854C9 /* UIView+Extension.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		63937B4D2418E611000854C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63937B2E2418E60E000854C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63937B352418E60E000854C9;
+			remoteInfo = FPSPlayer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		63937B362418E60E000854C9 /* JioCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JioCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63937B392418E60E000854C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		63937B3B2418E60E000854C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		63937B3D2418E60E000854C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		63937B402418E60E000854C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63937B422418E611000854C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63937B452418E611000854C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		63937B472418E611000854C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63937B4C2418E611000854C9 /* FPSPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FPSPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63937B502418E611000854C9 /* FPSPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSPlayerTests.swift; sourceTree = "<group>"; };
+		63937B522418E611000854C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63937B5B2418E64B000854C9 /* JioMediaPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JioMediaPlayerView.swift; sourceTree = "<group>"; };
+		63937B5D2418E6B3000854C9 /* AVPlayer+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVPlayer+Extensions.swift"; sourceTree = "<group>"; };
+		63937B5F2418EB14000854C9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63937B332418E60E000854C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63937B492418E611000854C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63937B2D2418E60E000854C9 = {
+			isa = PBXGroup;
+			children = (
+				63937B382418E60E000854C9 /* FPSPlayer */,
+				63937B4F2418E611000854C9 /* FPSPlayerTests */,
+				63937B372418E60E000854C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63937B372418E60E000854C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63937B362418E60E000854C9 /* JioCinema.app */,
+				63937B4C2418E611000854C9 /* FPSPlayerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		63937B382418E60E000854C9 /* FPSPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				63937B392418E60E000854C9 /* AppDelegate.swift */,
+				63937B3B2418E60E000854C9 /* SceneDelegate.swift */,
+				63937B3D2418E60E000854C9 /* ViewController.swift */,
+				63937B3F2418E60E000854C9 /* Main.storyboard */,
+				63937B5B2418E64B000854C9 /* JioMediaPlayerView.swift */,
+				63937B5D2418E6B3000854C9 /* AVPlayer+Extensions.swift */,
+				63937B422418E611000854C9 /* Assets.xcassets */,
+				63937B442418E611000854C9 /* LaunchScreen.storyboard */,
+				63937B472418E611000854C9 /* Info.plist */,
+				63937B5F2418EB14000854C9 /* UIView+Extension.swift */,
+			);
+			path = FPSPlayer;
+			sourceTree = "<group>";
+		};
+		63937B4F2418E611000854C9 /* FPSPlayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				63937B502418E611000854C9 /* FPSPlayerTests.swift */,
+				63937B522418E611000854C9 /* Info.plist */,
+			);
+			path = FPSPlayerTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63937B352418E60E000854C9 /* JioCinema */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63937B552418E611000854C9 /* Build configuration list for PBXNativeTarget "JioCinema" */;
+			buildPhases = (
+				63937B322418E60E000854C9 /* Sources */,
+				63937B332418E60E000854C9 /* Frameworks */,
+				63937B342418E60E000854C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JioCinema;
+			productName = FPSPlayer;
+			productReference = 63937B362418E60E000854C9 /* JioCinema.app */;
+			productType = "com.apple.product-type.application";
+		};
+		63937B4B2418E611000854C9 /* FPSPlayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63937B582418E611000854C9 /* Build configuration list for PBXNativeTarget "FPSPlayerTests" */;
+			buildPhases = (
+				63937B482418E611000854C9 /* Sources */,
+				63937B492418E611000854C9 /* Frameworks */,
+				63937B4A2418E611000854C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				63937B4E2418E611000854C9 /* PBXTargetDependency */,
+			);
+			name = FPSPlayerTests;
+			productName = FPSPlayerTests;
+			productReference = 63937B4C2418E611000854C9 /* FPSPlayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63937B2E2418E60E000854C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Amardeep Bikkad";
+				TargetAttributes = {
+					63937B352418E60E000854C9 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					63937B4B2418E611000854C9 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 63937B352418E60E000854C9;
+					};
+				};
+			};
+			buildConfigurationList = 63937B312418E60E000854C9 /* Build configuration list for PBXProject "FPSPlayer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 63937B2D2418E60E000854C9;
+			productRefGroup = 63937B372418E60E000854C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63937B352418E60E000854C9 /* JioCinema */,
+				63937B4B2418E611000854C9 /* FPSPlayerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		63937B342418E60E000854C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63937B462418E611000854C9 /* LaunchScreen.storyboard in Resources */,
+				63937B432418E611000854C9 /* Assets.xcassets in Resources */,
+				63937B412418E60E000854C9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63937B4A2418E611000854C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63937B322418E60E000854C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63937B602418EB14000854C9 /* UIView+Extension.swift in Sources */,
+				63937B3E2418E60E000854C9 /* ViewController.swift in Sources */,
+				63937B5C2418E64B000854C9 /* JioMediaPlayerView.swift in Sources */,
+				63937B3A2418E60E000854C9 /* AppDelegate.swift in Sources */,
+				63937B3C2418E60E000854C9 /* SceneDelegate.swift in Sources */,
+				63937B5E2418E6B3000854C9 /* AVPlayer+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63937B482418E611000854C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63937B512418E611000854C9 /* FPSPlayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		63937B4E2418E611000854C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63937B352418E60E000854C9 /* JioCinema */;
+			targetProxy = 63937B4D2418E611000854C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		63937B3F2418E60E000854C9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63937B402418E60E000854C9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		63937B442418E611000854C9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63937B452418E611000854C9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		63937B532418E611000854C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		63937B542418E611000854C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63937B562418E611000854C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8PVH2NGH42;
+				INFOPLIST_FILE = FPSPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jioondemand;
+				PRODUCT_NAME = JioCinema;
+				PROVISIONING_PROFILE_SPECIFIER = JioOnDemandDevelopmentProfile;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		63937B572418E611000854C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8PVH2NGH42;
+				INFOPLIST_FILE = FPSPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jioondemand;
+				PRODUCT_NAME = JioCinema;
+				PROVISIONING_PROFILE_SPECIFIER = JioOnDemandDevelopmentProfile;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		63937B592418E611000854C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S64LYD2NCB;
+				INFOPLIST_FILE = FPSPlayerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.FPSPlayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPSPlayer.app/FPSPlayer";
+			};
+			name = Debug;
+		};
+		63937B5A2418E611000854C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S64LYD2NCB;
+				INFOPLIST_FILE = FPSPlayerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.FPSPlayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPSPlayer.app/FPSPlayer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63937B312418E60E000854C9 /* Build configuration list for PBXProject "FPSPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63937B532418E611000854C9 /* Debug */,
+				63937B542418E611000854C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63937B552418E611000854C9 /* Build configuration list for PBXNativeTarget "JioCinema" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63937B562418E611000854C9 /* Debug */,
+				63937B572418E611000854C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63937B582418E611000854C9 /* Build configuration list for PBXNativeTarget "FPSPlayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63937B592418E611000854C9 /* Debug */,
+				63937B5A2418E611000854C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63937B2E2418E60E000854C9 /* Project object */;
+}
