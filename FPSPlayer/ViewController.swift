@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     
     var persistableKey: Data?
     
+    var videoAsset : AVURLAsset?
+    
     private lazy var avasseturlSession: AVAssetDownloadURLSession = {
           let config = URLSessionConfiguration.background(withIdentifier: "MySession")
           config.isDiscretionary = true
@@ -37,12 +39,13 @@ class ViewController: UIViewController {
     @IBAction func onTapDownload(_ sender: Any) {
         let videoURLStr = self.url
         guard let videoUrl = URL(string: videoURLStr) else{return}
-        let headerValues = ["ssotoken" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWUiOiI4ZWQ2MDI2Ny0wYTdmLTRiZGItODFkMS1lZWYwMDU2YTUxMTkiLCJ1c2VyVHlwZSI6IlJJTHBlcnNvbiIsImF1dGhMZXZlbCI6IjMwIiwiZGV2aWNlSWQiOiI0Njc2NDU0OTc4NWQ1NDE0Zjg0YTEwODc1ZGYzNjZiNDlhZjM2ZGJkYjQ5ZTliNDMyMDRlNDljN2U2NGNlOGMwMTIyZTQwMzBjNGQ5MTkyODU3OTRlNmRjOGYxN2Y2NmM3MjZjMmQwOTNhYzQ4M2MxZDY2OWQ4YmY3YjkxYjYyMSIsImp0aSI6ImEwNDJjZTU4LWYwYWYtNDFiYS05ODA4LTVlNTFhOWJkZGZjNCIsImlhdCI6MTU4MzkxMDUyOH0.AWKnFWh7KiYjUVcYriKPHYUPs2FNnCzX7rFV2K6JENY"]
+        //let headerValues = ["ssotoken" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWUiOiI4ZWQ2MDI2Ny0wYTdmLTRiZGItODFkMS1lZWYwMDU2YTUxMTkiLCJ1c2VyVHlwZSI6IlJJTHBlcnNvbiIsImF1dGhMZXZlbCI6IjMwIiwiZGV2aWNlSWQiOiI0Njc2NDU0OTc4NWQ1NDE0Zjg0YTEwODc1ZGYzNjZiNDlhZjM2ZGJkYjQ5ZTliNDMyMDRlNDljN2U2NGNlOGMwMTIyZTQwMzBjNGQ5MTkyODU3OTRlNmRjOGYxN2Y2NmM3MjZjMmQwOTNhYzQ4M2MxZDY2OWQ4YmY3YjkxYjYyMSIsImp0aSI6ImEwNDJjZTU4LWYwYWYtNDFiYS05ODA4LTVlNTFhOWJkZGZjNCIsImlhdCI6MTU4MzkxMDUyOH0.AWKnFWh7KiYjUVcYriKPHYUPs2FNnCzX7rFV2K6JENY"]
+        let headerValues = ["User-Agent" : "tizen"]
         let header = ["AVURLAssetHTTPHeaderFieldsKey" : headerValues]
-        let videoAsset = AVURLAsset(url: videoUrl, options: header)
-        videoAsset.resourceLoader.preloadsEligibleContentKeys = true
-        videoAsset.resourceLoader.setDelegate(self, queue: DispatchQueue(label: "jioCinema-delegateQueue"))
-
+        self.videoAsset = AVURLAsset(url: videoUrl, options: header)
+         self.videoAsset?.resourceLoader.preloadsEligibleContentKeys = true
+         self.videoAsset?.resourceLoader.setDelegate(self, queue: DispatchQueue(label: "jioCinema-delegateQueue"))
+        //startContentDownload()
         
     }
     
