@@ -128,8 +128,7 @@ extension ViewController: AVAssetResourceLoaderDelegate {
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         
         if #available(iOS 11.2, *) {
-            if  let contentTypes = loadingRequest.contentInformationRequest?.allowedContentTypes,
-                !contentTypes.contains(AVStreamingKeyDeliveryPersistentContentKeyType) {
+           
                 
                 // Fallback to provide online FairPlay Streaming key from key server.
                 let URL_SCHEME_NAME = "skd"
@@ -162,7 +161,7 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                            }
                        }
                 
-            }
+            
         } else {
             // Fallback on earlier versions
         }
