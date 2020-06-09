@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var downloadBUtton: UIButton!
     var jioMediaPlayer: JioMediaPlayerView?
-    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/93/57/8ec6a431c29411e6a3132fc17de8f966.smil/playlist_SD_PHONE_HDP_A.m3u8"
+    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps3.m3u8"
     
     var persistableURL: URL?
     
@@ -149,7 +149,7 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                                     //Persist key
                                     self.persistableKey = persistentKey
                                     //Call to download asset
-                                    
+                                    self.startContentDownload()
                                     loadingRequest.dataRequest?.respond(with: persistentKey)
                                     loadingRequest.finishLoading()
                                 }
