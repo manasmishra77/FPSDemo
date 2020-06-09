@@ -145,8 +145,10 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                        let assetId = Data(bytes: assetStr.cString(using: String.Encoding.utf8)!, count: assetStr.lengthOfBytes(using: String.Encoding.utf8))
                        self.getAppCertificateData {[weak self] (certificate) in
                            guard let self = self else {return}
-
-                           if let requestBytes = try? loadingRequest.streamingContentKeyRequestData(forApp: certificate, contentIdentifier: assetId, options: [AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: true]) {
+                            
+                        do {
+                            
+                            let requestBytes = try loadingRequest.streamingContentKeyRequestData(forApp: certificate, contentIdentifier: assetId, options: [AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: true])
                             self.getContentKeyAndLeaseExpiry(requestBytes: requestBytes, assetStr: assetStr, expiryDuration: 0, error: error) { (ckcData) in
                                 if let ckcData = ckcData {
                                     do {
@@ -160,11 +162,17 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                                         print(error)
                                     }
                                     
+                                } else {
+                                    print("No ckc data")
                                 }
                                 
                             }
-                              
-                           }
+                            
+                            
+                        } catch {
+                          print(error)
+                        }
+                        
                        }
                 
             
