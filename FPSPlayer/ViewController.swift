@@ -148,13 +148,18 @@ extension ViewController: AVAssetResourceLoaderDelegate {
 
                            if let requestBytes = try? loadingRequest.streamingContentKeyRequestData(forApp: certificate, contentIdentifier: assetId, options: [AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: true]) {
                             self.getContentKeyAndLeaseExpiry(requestBytes: requestBytes, assetStr: assetStr, expiryDuration: 0, error: error) { (ckcData) in
-                                if let ckcData = ckcData, let persistentKey = try? loadingRequest.persistentContentKey(fromKeyVendorResponse: ckcData, options: nil) {
-                                    //Persist key
-                                    self.persistableKey = persistentKey
-                                    //Call to download asset
-                                    self.startContentDownload()
-                                    loadingRequest.dataRequest?.respond(with: persistentKey)
-                                    loadingRequest.finishLoading()
+                                if let ckcData = ckcData {
+                                    do {
+                                        let persistentKey = try loadingRequest.persistentContentKey(fromKeyVendorResponse: ckcData, options: nil)
+                                        self.persistableKey = persistentKey
+                                        //Call to download asset
+                                        self.startContentDownload()
+                                        loadingRequest.dataRequest?.respond(with: persistentKey)
+                                        loadingRequest.finishLoading()
+                                    } catch {
+                                        print(error)
+                                    }
+                                    
                                 }
                                 
                             }
