@@ -10,6 +10,10 @@ import UIKit
 import AVKit
 import AVFoundation
 
+let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getkey"
+let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getcert"
+
+
 class ViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var playButton: UIButton!
@@ -17,7 +21,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var downloadBUtton: UIButton!
     var jioMediaPlayer: JioMediaPlayerView?
-    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps3.m3u8"
+    //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps3.m3u8"
+    //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/60/80/ca5f9820aa8b11ea9ab505e8b94b6f72.smil/playlist_HD_PHONE_HDP_A.m3u8"
+    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps4.m3u8"
     
     var persistableURL: URL?
     
@@ -36,6 +42,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func playDownloadedItem(_ sender: Any) {
+        playDownloadedAsset()
+    }
+    
     @IBAction func onTapDownload(_ sender: Any) {
         let videoURLStr = self.url
         guard let videoUrl = URL(string: videoURLStr) else{return}
@@ -82,7 +93,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func onTapPlayButton(_ sender: Any) {
-        //playVideoOnView()
+        playVideoOnView()
     }
     
     func playVideoOnView() {
@@ -111,6 +122,10 @@ class ViewController: UIViewController {
             self.jioMediaPlayer?.mediaPlayer?.play()
         })
     }
+    
+    func playVideoUsingContentKeySession() {
+        
+    }
 }
     
 
@@ -121,65 +136,86 @@ extension ViewController: JioMediaPlayerDelgate {
 }
 
 extension ViewController: AVAssetResourceLoaderDelegate {
+    enum ProgramError: Error {
+        case missingApplicationCertificate
+        case noCKCReturnedByKSM
+        case urlNotCorrect
+        case unsupportedOS
+        case keyNotFPSType
+        case assetIDError
+        case certUrlNotCorrect
+        case keyUrlNotCorrect
+    }
     
     /*
      When its a Fairplay URL, run the logic for the fairplay, else move ahead with the further implementation for .ts and .m3u8
      */
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
+        guard #available(iOS 11.2, *) else {
+            loadingRequest.finishLoading(with: ProgramError.unsupportedOS)
+            return false
+        }
+    
+        let URL_SCHEME_NAME = "skd"
+        let url: URL? = loadingRequest.request.url
+        // Must be a non-standard URI scheme for AVFoundation to invoke your AVAssetResourceLoader delegate
+        // for help in loading it.
+        if let urlScheme = url?.scheme, (urlScheme !=  URL_SCHEME_NAME) {
+            loadingRequest.finishLoading(with: ProgramError.keyNotFPSType)
+            return false
+        }
         
-        if #available(iOS 11.2, *) {
-           
+        
+        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
+        
+        
+        let assetStr: String = url?.host ?? ""
+        guard let assetStrBytes = assetStr.cString(using: String.Encoding.utf8) else {
+            loadingRequest.finishLoading(with: ProgramError.assetIDError)
+                       return false
+        }
+        
+        
+        let assetId = Data(bytes: assetStrBytes, count: assetStr.lengthOfBytes(using: String.Encoding.utf8))
+        
+        self.getAppCertificateData {[weak self] (certificate, err) in
+            guard let self = self else {return}
+            guard err == nil else {
+                loadingRequest.finishLoading(with: err)
+                return
+            }
+            
+            do {
                 
-                // Fallback to provide online FairPlay Streaming key from key server.
-                let URL_SCHEME_NAME = "skd"
-                       let dataRequest: AVAssetResourceLoadingDataRequest? = loadingRequest.dataRequest
-                       let url: URL? = loadingRequest.request.url
-                       let error: Error? = nil
-                       // Must be a non-standard URI scheme for AVFoundation to invoke your AVAssetResourceLoader delegate
-                       // for help in loading it.
-                       if let urlScheme = url?.scheme, (urlScheme !=  URL_SCHEME_NAME) {
-                           return false
-                       }
-             loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
-                       let assetStr: String = url?.host ?? ""
-                       let assetId = Data(bytes: assetStr.cString(using: String.Encoding.utf8)!, count: assetStr.lengthOfBytes(using: String.Encoding.utf8))
-                       self.getAppCertificateData {[weak self] (certificate) in
-                           guard let self = self else {return}
-                            
+                let requestBytes = try loadingRequest.streamingContentKeyRequestData(forApp: certificate, contentIdentifier: assetId, options: [AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: true])
+                
+                self.getContentKeyAndLeaseExpiry(requestBytes: requestBytes, assetStr: assetStr, expiryDuration: 0, error: nil) { (ckcData, err) in
+                    if err != nil {
+                        loadingRequest.finishLoading(with: err)
+                        return
+                    }
+                    if let ckcData = ckcData {
                         do {
-                            
-                            let requestBytes = try loadingRequest.streamingContentKeyRequestData(forApp: certificate, contentIdentifier: assetId, options: [AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: true])
-                            self.getContentKeyAndLeaseExpiry(requestBytes: requestBytes, assetStr: assetStr, expiryDuration: 0, error: error) { (ckcData) in
-                                if let ckcData = ckcData {
-                                    do {
-                                        let persistentKey = try loadingRequest.persistentContentKey(fromKeyVendorResponse: ckcData, options: nil)
-                                        self.persistableKey = persistentKey
-                                        //Call to download asset
-                                        self.startContentDownload()
-                                        loadingRequest.dataRequest?.respond(with: persistentKey)
-                                        loadingRequest.finishLoading()
-                                    } catch {
-                                        print(error)
-                                    }
-                                    
-                                } else {
-                                    print("No ckc data")
-                                }
-                                
-                            }
-                            
-                            
+                            let persistentKey = try loadingRequest.persistentContentKey(fromKeyVendorResponse: ckcData, options: nil)
+                            self.persistableKey = persistentKey
+                            //Call to download asset
+                            self.startContentDownload()
+                            loadingRequest.dataRequest?.respond(with: persistentKey)
+                            loadingRequest.finishLoading()
                         } catch {
-                          print(error)
+                            loadingRequest.finishLoading(with: error)
                         }
                         
-                       }
-                
+                    } else {
+                        loadingRequest.finishLoading(with: ProgramError.noCKCReturnedByKSM)
+                    }
+                }
+            } catch {
+                loadingRequest.finishLoading(with: error)
+            }
             
-        } else {
-            // Fallback on earlier versions
         }
-       
+        
         return true
     }
     
@@ -190,31 +226,27 @@ extension ViewController: AVAssetResourceLoaderDelegate {
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForRenewalOfRequestedResource renewalRequest: AVAssetResourceRenewalRequest) -> Bool {
         return true
     }
-    func getAppCertificateData(completionHandler: @escaping (Data) -> Void) {
-            let URL_GET_CERT = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getcert"
+    
+    func getAppCertificateData(completionHandler: @escaping (Data, Error?) -> Void) {
             guard let url = URL(string: URL_GET_CERT) else {
+                completionHandler(Data(), ProgramError.certUrlNotCorrect)
                 return
             }
             let req = NSMutableURLRequest(url: url)
-    //        let ssoToken = self.appManager.getUserModel()?.ssoToken
-    //        let uniqueId = self.appManager.getUserModel()?.uniqueId
-    //        req.setValue(ssoToken, forHTTPHeaderField: "ssotoken")
-    //        req.setValue(uniqueId, forHTTPHeaderField: "uniqueid")
-    //        req.setValue(vUserGroup, forHTTPHeaderField: "usergroup")
-    //        req.setValue(vUserAgent, forHTTPHeaderField: "useragent")
-    //        req.setValue(vOS, forHTTPHeaderField: kOs)
-    //        req.setValue(vDeviceType, forHTTPHeaderField: "devicetype")
-    //        req.setValue(xAPISignature, forHTTPHeaderField: kApiSignatures)
             let session = URLSession.shared
             let task = session.dataTask(with: req as URLRequest, completionHandler: {data, _, error -> Void in
                 if error != nil {
+                    completionHandler(Data(), error)
                     return
                 }
                 if let dataFromServer = data {
                     if let decodedData: NSData = NSData.init(base64Encoded: dataFromServer, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-                        completionHandler(decodedData as Data)
+                        completionHandler(decodedData as Data, nil)
+                        return
                     }
                 }
+                completionHandler(Data(), ProgramError.missingApplicationCertificate)
+                
             })
             task.resume()
         }
@@ -223,41 +255,41 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                                           assetStr: String,
                                           expiryDuration: TimeInterval,
                                           error: Error?,
-                                          completionHandler: @escaping(Data?) throws -> Void) {
+                                          completionHandler: @escaping(Data?, Error?) -> ())
+        {
             let dict: [AnyHashable: Any] = [
                 "spc" : requestBytes.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)),
                 "id" : "JioCinemaID",
+                //"type": "persist_unlimited",
+                
+                //"type": "persist_rental",
+                "type": "persist_unlimited30",
+                
                 "leaseExpiryDuration" : Double(expiryDuration)
             ]
-            var jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: [])
-            let URL_GET_KEY = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getkey"
+            let jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: [])
+          
             guard let url = URL(string: URL_GET_KEY) else {
+                completionHandler(nil, ProgramError.keyUrlNotCorrect)
                 return
             }
             let req = NSMutableURLRequest(url: url)
             req.httpMethod = "POST"
             req.setValue("\(UInt((jsonData?.count ?? 0)))", forHTTPHeaderField: "Content-Length")
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //        req.setValue(self.appManager.getUserModel()?.ssoToken, forHTTPHeaderField: "ssotoken")
-    //        req.setValue(self.appManager.getUserModel()?.uniqueId, forHTTPHeaderField: kUniqueId)
-    //        req.setValue(vUserGroup, forHTTPHeaderField: "usergroup")
-    //        req.setValue(vUserAgent, forHTTPHeaderField: "useragent")
-    //        req.setValue(vOS, forHTTPHeaderField: kOs)
-    //        req.setValue(vDeviceType, forHTTPHeaderField: "devicetype")
-    //        req.setValue(xAPISignature, forHTTPHeaderField: kApiSignatures)
                 
             req.httpBody = jsonData
             
             let session = URLSession.shared
             let task = session.dataTask(with: req as URLRequest, completionHandler: {data, _, error -> Void in
                 if error != nil {
-                    
+                    completionHandler(data, error)
                     return
                 }
                 if (data != nil), let decodedData = Data(base64Encoded: data!, options: []) {
-                    try? completionHandler(decodedData)
+                    completionHandler(decodedData, nil)
                 } else {
-                    try? completionHandler(data)
+                    completionHandler(data, nil)
                 }
             })
             task.resume()

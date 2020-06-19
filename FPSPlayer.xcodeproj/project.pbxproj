@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19E74C5A249CB33700C10F32 /* AVContentKeySessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E74C59249CB33700C10F32 /* AVContentKeySessionHandler.swift */; };
 		63937B3A2418E60E000854C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B392418E60E000854C9 /* AppDelegate.swift */; };
 		63937B3C2418E60E000854C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B3B2418E60E000854C9 /* SceneDelegate.swift */; };
 		63937B3E2418E60E000854C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63937B3D2418E60E000854C9 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19E74C59249CB33700C10F32 /* AVContentKeySessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVContentKeySessionHandler.swift; sourceTree = "<group>"; };
 		63937B362418E60E000854C9 /* JioCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JioCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63937B392418E60E000854C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63937B3B2418E60E000854C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				63937B3D2418E60E000854C9 /* ViewController.swift */,
 				63937B3F2418E60E000854C9 /* Main.storyboard */,
 				63937B5B2418E64B000854C9 /* JioMediaPlayerView.swift */,
+				19E74C59249CB33700C10F32 /* AVContentKeySessionHandler.swift */,
 				63937B5D2418E6B3000854C9 /* AVPlayer+Extensions.swift */,
 				63937B422418E611000854C9 /* Assets.xcassets */,
 				63937B442418E611000854C9 /* LaunchScreen.storyboard */,
@@ -215,6 +218,7 @@
 				63937B3A2418E60E000854C9 /* AppDelegate.swift in Sources */,
 				63937B3C2418E60E000854C9 /* SceneDelegate.swift in Sources */,
 				63937B5E2418E6B3000854C9 /* AVPlayer+Extensions.swift in Sources */,
+				19E74C5A249CB33700C10F32 /* AVContentKeySessionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

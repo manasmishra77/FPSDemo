@@ -70,20 +70,11 @@ extension JioMediaPlayerView {
     }
     
     func getAppCertificateData(completionHandler: @escaping (Data) -> Void) {
-        let URL_GET_CERT = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getcert"
+        let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getcert"
         guard let url = URL(string: URL_GET_CERT) else {
             return
         }
         let req = NSMutableURLRequest(url: url)
-//        let ssoToken = self.appManager.getUserModel()?.ssoToken
-//        let uniqueId = self.appManager.getUserModel()?.uniqueId
-//        req.setValue(ssoToken, forHTTPHeaderField: "ssotoken")
-//        req.setValue(uniqueId, forHTTPHeaderField: "uniqueid")
-//        req.setValue(vUserGroup, forHTTPHeaderField: "usergroup")
-//        req.setValue(vUserAgent, forHTTPHeaderField: "useragent")
-//        req.setValue(vOS, forHTTPHeaderField: kOs)
-//        req.setValue(vDeviceType, forHTTPHeaderField: "devicetype")
-//        req.setValue(xAPISignature, forHTTPHeaderField: kApiSignatures)
         let session = URLSession.shared
         let task = session.dataTask(with: req as URLRequest, completionHandler: {data, _, error -> Void in
             if error != nil {
@@ -109,7 +100,7 @@ extension JioMediaPlayerView {
             "leaseExpiryDuration" : Double(expiryDuration)
         ]
         var jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: [])
-        let URL_GET_KEY = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getkey"
+        let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getkey"
         guard let url = URL(string: URL_GET_KEY) else {
             return
         }
@@ -117,14 +108,7 @@ extension JioMediaPlayerView {
         req.httpMethod = "POST"
         req.setValue("\(UInt((jsonData?.count ?? 0)))", forHTTPHeaderField: "Content-Length")
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        req.setValue(self.appManager.getUserModel()?.ssoToken, forHTTPHeaderField: "ssotoken")
-//        req.setValue(self.appManager.getUserModel()?.uniqueId, forHTTPHeaderField: kUniqueId)
-//        req.setValue(vUserGroup, forHTTPHeaderField: "usergroup")
-//        req.setValue(vUserAgent, forHTTPHeaderField: "useragent")
-//        req.setValue(vOS, forHTTPHeaderField: kOs)
-//        req.setValue(vDeviceType, forHTTPHeaderField: "devicetype")
-//        req.setValue(xAPISignature, forHTTPHeaderField: kApiSignatures)
-            
+
         req.httpBody = jsonData
         
         let session = URLSession.shared
