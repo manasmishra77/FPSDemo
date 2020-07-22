@@ -61,7 +61,7 @@ extension JioMediaPlayerView {
                                                         dataRequest?.respond(with: responseData)
                                                         loadingRequest.finishLoading()
                                                     } else {
-                                                        loadingRequest.finishLoading()
+                                                        loadingRequest.finishLoading(with: NSError(domain: "Key fetching failed", code: 455, userInfo: nil))
                                                     }
                 })
             }
@@ -70,7 +70,7 @@ extension JioMediaPlayerView {
     }
     
     func getAppCertificateData(completionHandler: @escaping (Data) -> Void) {
-        let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getcert"
+       // let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getcert"
         guard let url = URL(string: URL_GET_CERT) else {
             return
         }
@@ -99,8 +99,8 @@ extension JioMediaPlayerView {
             "id" : "JioCinemaID",
             "leaseExpiryDuration" : Double(expiryDuration)
         ]
-        var jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: [])
-        let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getkey"
+        let jsonData: Data? = try? JSONSerialization.data(withJSONObject: dict, options: [])
+       // let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fps/getkey"
         guard let url = URL(string: URL_GET_KEY) else {
             return
         }
@@ -118,6 +118,8 @@ extension JioMediaPlayerView {
                 return
             }
             if (data != nil), let decodedData = Data(base64Encoded: data!, options: []) {
+                let str = String(decoding: data!, as: UTF8.self)
+                print(str)
                 try? completionHandler(decodedData)
             } else {
                 try? completionHandler(data)

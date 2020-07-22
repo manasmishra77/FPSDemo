@@ -10,8 +10,11 @@ import UIKit
 import AVKit
 import AVFoundation
 
-let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getkey"
-let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getcert"
+//let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getkey"
+let URL_GET_KEY = "https://jiocinemaapi-qa.jio.ril.com/fps/rest/getLicense"
+//let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getcert"
+let URL_GET_CERT                = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getcert"
+
 
 
 class ViewController: UIViewController {
@@ -22,8 +25,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var downloadBUtton: UIButton!
     var jioMediaPlayer: JioMediaPlayerView?
     //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps3.m3u8"
-    //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/60/80/ca5f9820aa8b11ea9ab505e8b94b6f72.smil/playlist_HD_PHONE_HDP_A.m3u8"
-    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps4.m3u8"
+    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/60/80/ca5f9820aa8b11ea9ab505e8b94b6f72.smil/playlist_HD_PHONE_HDP_A.m3u8"
+    //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps4.m3u8"
     
     var persistableURL: URL?
     
@@ -260,10 +263,10 @@ extension ViewController: AVAssetResourceLoaderDelegate {
             let dict: [AnyHashable: Any] = [
                 "spc" : requestBytes.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)),
                 "id" : "JioCinemaID",
-                //"type": "persist_unlimited",
+                "type": "persist_unlimited",
                 
                 //"type": "persist_rental",
-                "type": "persist_unlimited30",
+                //"type": "persist_unlimited30",
                 
                 "leaseExpiryDuration" : Double(expiryDuration)
             ]
