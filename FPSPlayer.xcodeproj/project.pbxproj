@@ -387,9 +387,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jioondemand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jodswift;
 				PRODUCT_NAME = JioCinema;
-				PROVISIONING_PROFILE_SPECIFIER = JioOnDemandDevelopmentProfile;
+				PROVISIONING_PROFILE_SPECIFIER = JODSwift;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -399,7 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8PVH2NGH42;
 				INFOPLIST_FILE = FPSPlayer/Info.plist;
@@ -408,9 +408,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jioondemand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.media.jodswift;
 				PRODUCT_NAME = JioCinema;
-				PROVISIONING_PROFILE_SPECIFIER = JioOnDemandDevelopmentProfile;
+				PROVISIONING_PROFILE_SPECIFIER = JioCinemaSwiftDist;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
