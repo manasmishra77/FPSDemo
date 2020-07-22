@@ -10,8 +10,8 @@ import UIKit
 import AVKit
 import AVFoundation
 
-//let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getkey"
-let URL_GET_KEY = "https://jiocinemaapi-qa.jio.ril.com/fps/rest/getLicense"
+let URL_GET_KEY = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getkey"
+//let URL_GET_KEY = "https://jiocinemaapi-qa.jio.ril.com/fps/rest/getLicense"
 //let URL_GET_CERT = "https://jiocinemaapp.jio.ril.com/apis/06758e99be484fca56fb/v3/fpsdownload/getcert"
 let URL_GET_CERT                = "http://prod.media.jio.com/apis/06758e99be484fca56fb/v3/fps/getcert"
 
@@ -21,16 +21,41 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var persistentTypeTextfield: UITextField!
+    @IBOutlet weak var playdownloadableButton: UIButton!
     
     @IBOutlet weak var downloadBUtton: UIButton!
     var jioMediaPlayer: JioMediaPlayerView?
     //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps3.m3u8"
-    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/60/80/ca5f9820aa8b11ea9ab505e8b94b6f72.smil/playlist_HD_PHONE_HDP_A.m3u8"
+    //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/60/80/ca5f9820aa8b11ea9ab505e8b94b6f72.smil/playlist_HD_PHONE_HDP_A.m3u8"
     //let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/33/66/15a367006a1111eaa91bd94e36ab70b4.smil/index_fps4.m3u8"
     
-    var persistableURL: URL?
     
-    var persistableKey: Data?
+    let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/26/85/244c54d066d347659996215f3e23c420.smil/playlist_voot_download.m3u8" // 15mins played
+    // Done let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/14/82/32bf48f356a4400c9fdc45a42759a5d6.smil/playlist_voot_download.m3u8"
+    // Done let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/23/20/23cb704e469e4a94ac159d1e14eeff14.smil/playlist_voot_download.m3u8"
+    // Done let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/70/60/5aa17c573ac049c8b9ec016a49e889e7.smil/playlist_voot_download.m3u8"
+    // Done let url = "http://jiovod.cdn.jio.com/vod/_definst_/smil:fps/22/62/5d3b65e594f54bb392accb1c80dcdf79.smil/playlist_voot_download.m3u8"
+    
+    
+    
+    var persistableURL: URL? {
+        didSet {
+            if let url = persistableURL {
+                UserDefaults.standard.set(url, forKey: "persistableURL")
+            }
+        }
+    }
+    
+    var persistableKey: Data? {
+        didSet {
+            if let key = persistableKey {
+                UserDefaults.standard.set(key, forKey: "persistableKey")
+            }
+        }
+    }
+    var persistType: String = "persist_15mins"
     
     var videoAsset : AVURLAsset?
     
@@ -44,6 +69,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+       self.hideKeyboardWhenTappedAround()
+
+
     }
     
     @IBAction func playDownloadedItem(_ sender: Any) {
@@ -51,6 +79,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onTapDownload(_ sender: Any) {
+        if self.persistentTypeTextfield.text != "" {
+            self.persistType = self.persistentTypeTextfield.text!
+        }
         let videoURLStr = self.url
         guard let videoUrl = URL(string: videoURLStr) else{return}
         //let headerValues = ["ssotoken" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWUiOiI4ZWQ2MDI2Ny0wYTdmLTRiZGItODFkMS1lZWYwMDU2YTUxMTkiLCJ1c2VyVHlwZSI6IlJJTHBlcnNvbiIsImF1dGhMZXZlbCI6IjMwIiwiZGV2aWNlSWQiOiI0Njc2NDU0OTc4NWQ1NDE0Zjg0YTEwODc1ZGYzNjZiNDlhZjM2ZGJkYjQ5ZTliNDMyMDRlNDljN2U2NGNlOGMwMTIyZTQwMzBjNGQ5MTkyODU3OTRlNmRjOGYxN2Y2NmM3MjZjMmQwOTNhYzQ4M2MxZDY2OWQ4YmY3YjkxYjYyMSIsImp0aSI6ImEwNDJjZTU4LWYwYWYtNDFiYS05ODA4LTVlNTFhOWJkZGZjNCIsImlhdCI6MTU4MzkxMDUyOH0.AWKnFWh7KiYjUVcYriKPHYUPs2FNnCzX7rFV2K6JENY"]
@@ -64,7 +95,10 @@ class ViewController: UIViewController {
     }
     
     func startContentDownload() {
-        let url = URL(string: self.url)
+        self.playdownloadableButton.isUserInteractionEnabled = false
+        guard let urlS = urlTextField.text, urlS != "" else {return}
+
+        let url = URL(string: urlS)
         //let url = URL(string: <#T##String#>) //put some m3u8 url
         let headerValues = ["User-Agent" : "tizen"]
         let header  = ["AVURLAssetHTTPHeaderFieldsKey" : headerValues]
@@ -74,6 +108,14 @@ class ViewController: UIViewController {
     }
     
     func playDownloadedAsset() {
+        let url = UserDefaults.standard.url(forKey: "persistableURL")
+        if url == nil {
+            return
+        }
+        let key = UserDefaults.standard.data(forKey: "persistableKey")
+        if key == nil {
+            return
+        }
         resetPlayer()
         let mediaPlayerView = JioMediaPlayerView(frame: playerView.frame)
         jioMediaPlayer = mediaPlayerView
@@ -83,8 +125,8 @@ class ViewController: UIViewController {
         jioMediaPlayer?.configurePlayerView()
         
         jioMediaPlayer?.isDownloadedFPSContent = true
-        jioMediaPlayer?.fpsPersistableKey = persistableKey
-        jioMediaPlayer?.configureFPSDownloadedContentURL(url: self.persistableURL!, completion: { (isplay) in
+        jioMediaPlayer?.fpsPersistableKey = key!
+        jioMediaPlayer?.configureFPSDownloadedContentURL(url: url!, completion: { (isplay) in
             if isplay {
                 self.jioMediaPlayer?.mediaPlayer?.play()
             } else {
@@ -119,6 +161,7 @@ class ViewController: UIViewController {
     //Used to play a content by passing url to player
     private func playContentInPlayer() {
         jioMediaPlayer?.isFpsAvailable = true
+        guard let url = urlTextField.text, url != "" else {return}
         self.jioMediaPlayer?.playVideo(with: url, completion: { [weak self] (_) in
             guard let self = self else {return}
             self.jioMediaPlayer?.mediaPlayer?.isMuted = false
@@ -202,7 +245,9 @@ extension ViewController: AVAssetResourceLoaderDelegate {
                             let persistentKey = try loadingRequest.persistentContentKey(fromKeyVendorResponse: ckcData, options: nil)
                             self.persistableKey = persistentKey
                             //Call to download asset
-                            self.startContentDownload()
+                            DispatchQueue.main.async {
+                                self.startContentDownload()
+                            }
                             loadingRequest.dataRequest?.respond(with: persistentKey)
                             loadingRequest.finishLoading()
                         } catch {
@@ -263,7 +308,7 @@ extension ViewController: AVAssetResourceLoaderDelegate {
             let dict: [AnyHashable: Any] = [
                 "spc" : requestBytes.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)),
                 "id" : "JioCinemaID",
-                "type": "persist_unlimited",
+                "type": self.persistType,
                 
                 //"type": "persist_rental",
                 //"type": "persist_unlimited30",
@@ -304,7 +349,8 @@ extension ViewController: AVAssetDownloadDelegate {
     //MARK: Delegates
        public func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL){
            print("DownloadedLocation:\(location.absoluteString)")
-        self.playButton.backgroundColor = .green
+        self.playdownloadableButton.backgroundColor = .green
+        self.playdownloadableButton.isUserInteractionEnabled = true
         self.persistableURL = location
        }
 
@@ -329,7 +375,10 @@ extension ViewController: AVAssetDownloadDelegate {
         if totalBytesExpectedToWrite > 0 {
             let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
             print("Progress \(downloadTask) \(progress)")
-            self.progressLabel.text = "\(progress)"
+            DispatchQueue.main.async {
+                self.progressLabel.text = "\(progress)"
+
+            }
         }
     }
     
@@ -357,4 +406,16 @@ extension ViewController: AVAssetDownloadDelegate {
 //          }
       }
     
+}
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

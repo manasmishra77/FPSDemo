@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -16,11 +16,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRd-bV-ZWn">
+                                <rect key="frame" x="107" y="216" width="200" height="40"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="N4U-Rn-LR1"/>
+                                    <constraint firstAttribute="height" constant="40" id="ocd-WS-KXP"/>
+                                </constraints>
+                                <state key="normal" title="Play by streaming">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapPlayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahW-Vd-bsX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hk-dF-fmc">
+                                <rect key="frame" x="165" y="176" width="69" height="30"/>
+                                <state key="normal" title="Download"/>
+                                <connections>
+                                    <action selector="onTapDownload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4XS-pX-y4R"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMF-tW-73T">
+                                <rect key="frame" x="165" y="145.66666666666666" width="68" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWt-BU-Ids">
+                                <rect key="frame" x="134" y="105.66666666666667" width="130" height="30.000000000000014"/>
+                                <state key="normal" title="Play Downloadable"/>
+                                <connections>
+                                    <action selector="playDownloadedItem:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3bp-iR-6jE"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Persistent type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nE6-x3-e45">
+                                <rect key="frame" x="20" y="61.666666666666657" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ktl-rh-6gz">
+                                <rect key="frame" x="20" y="5" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Mo-l2-YLv">
-                                <rect key="frame" x="0.0" y="50" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="286" width="414" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdu-an-JHu">
-                                        <rect key="frame" x="164" y="114.66666666666666" width="86" height="21"/>
+                                        <rect key="frame" x="164" y="114.66666666666669" width="86" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -35,59 +79,34 @@
                                     <constraint firstItem="Qdu-an-JHu" firstAttribute="centerX" secondItem="2Mo-l2-YLv" secondAttribute="centerX" id="akc-Na-NND"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRd-bV-ZWn">
-                                <rect key="frame" x="147" y="646" width="120" height="40"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="N4U-Rn-LR1"/>
-                                    <constraint firstAttribute="height" constant="40" id="ocd-WS-KXP"/>
-                                </constraints>
-                                <state key="normal" title="Play Video">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="onTapPlayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahW-Vd-bsX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hk-dF-fmc">
-                                <rect key="frame" x="173" y="577" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Download"/>
-                                <connections>
-                                    <action selector="onTapDownload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4XS-pX-y4R"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMF-tW-73T">
-                                <rect key="frame" x="186" y="456" width="68" height="78"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWt-BU-Ids">
-                                <rect key="frame" x="59" y="401" width="130" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play Downloadable"/>
-                                <connections>
-                                    <action selector="playDownloadedItem:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3bp-iR-6jE"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="2Mo-l2-YLv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="09B-hd-Ilc"/>
+                            <constraint firstItem="Ktl-rh-6gz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="28X-gc-JIJ"/>
+                            <constraint firstItem="2Mo-l2-YLv" firstAttribute="top" secondItem="LRd-bV-ZWn" secondAttribute="bottom" constant="30" id="3RA-Mt-f7X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ktl-rh-6gz" secondAttribute="trailing" constant="20" id="3YX-4Y-Hy9"/>
+                            <constraint firstItem="nE6-x3-e45" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8bk-2Z-h3a"/>
                             <constraint firstItem="2Mo-l2-YLv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="IO0-Jp-tbQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LRd-bV-ZWn" secondAttribute="bottom" constant="50" id="eWt-fM-jEW"/>
+                            <constraint firstItem="Ktl-rh-6gz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="P2w-V8-Wjp"/>
+                            <constraint firstItem="4hk-dF-fmc" firstAttribute="top" secondItem="OMF-tW-73T" secondAttribute="bottom" constant="10" id="ULM-gO-mrS"/>
+                            <constraint firstItem="mWt-BU-Ids" firstAttribute="top" secondItem="nE6-x3-e45" secondAttribute="bottom" constant="10" id="glD-Xw-uxz"/>
+                            <constraint firstItem="nE6-x3-e45" firstAttribute="top" secondItem="Ktl-rh-6gz" secondAttribute="bottom" constant="22.670000000000002" id="hFN-r2-Bnh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nE6-x3-e45" secondAttribute="trailing" constant="20" id="ms1-Ol-t1y"/>
+                            <constraint firstItem="OMF-tW-73T" firstAttribute="top" secondItem="mWt-BU-Ids" secondAttribute="bottom" constant="10" id="o51-ui-hfq"/>
                             <constraint firstItem="2Mo-l2-YLv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pRJ-NV-oiV"/>
                             <constraint firstItem="LRd-bV-ZWn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="slU-uW-j19"/>
+                            <constraint firstItem="LRd-bV-ZWn" firstAttribute="top" secondItem="4hk-dF-fmc" secondAttribute="bottom" constant="10" id="wWM-Jx-boL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="downloadBUtton" destination="4hk-dF-fmc" id="HbY-VF-kWO"/>
+                        <outlet property="persistentTypeTextfield" destination="nE6-x3-e45" id="KWX-iU-Fz4"/>
                         <outlet property="playButton" destination="LRd-bV-ZWn" id="irc-bP-DSZ"/>
+                        <outlet property="playdownloadableButton" destination="mWt-BU-Ids" id="bZU-gE-Oi5"/>
                         <outlet property="playerView" destination="2Mo-l2-YLv" id="v7C-zM-5Xs"/>
                         <outlet property="progressLabel" destination="OMF-tW-73T" id="MpL-wO-Bqk"/>
+                        <outlet property="urlTextField" destination="Ktl-rh-6gz" id="TnG-t5-J8b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
